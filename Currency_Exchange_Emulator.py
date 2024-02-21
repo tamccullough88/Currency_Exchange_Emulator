@@ -52,6 +52,9 @@ class Currency:
             x = (other.value / Currency.currencies[other.unit] * Currency.currencies[self.unit]) 
         return Currency(self.value - x, self.unit)            
         
+    def __rsub__(self,other):
+        res = self - other
+        return res
     
 
 v1 = Currency(23.43, "EUR")
@@ -61,6 +64,6 @@ print(f"2",v2 + v1)
 print(f"3",v1 + 3) # an int or a float is considered to be a USD value
 print(f"4",7.81 + v1)
 print(f"5",v1 - 3) # an int or a float is considered to be a USD value
-print(f"6",v2 - 30) 
+print(f"6",30 - v2) 
 
 
