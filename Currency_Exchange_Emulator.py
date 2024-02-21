@@ -42,6 +42,8 @@ class Currency:
     
     def __radd__(self,other):
         res = self + other
+        if self.unit != "USD":
+            res.changeTo("USD")
         return res
         
 
@@ -53,16 +55,21 @@ class Currency:
         return Currency(self.value - x, self.unit)            
         
     def __rsub__(self,other):
-        res = self - other
+        res = other - self.value
+        res = Currency(res,self.unit)
+        if self.unit != "USD":
+            res.changeTo("USD")
         return res
     
+    def __isub__(self,other):
+        return Currency.__sub__(self,other)
 
 v1 = Currency(23.43, "EUR")
 v2 = Currency(19.97, "USD")
 print(f"1",v1 + v2)
 print(f"2",v2 + v1)
 print(f"3",v1 + 3) # an int or a float is considered to be a USD value
-print(f"4",7.81 + v1)
+print(f"4",3 + v1)
 print(f"5",v1 - 3) # an int or a float is considered to be a USD value
 print(f"6",30 - v2) 
 
