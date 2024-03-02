@@ -8,7 +8,7 @@ class Currency:
         'EUR': 0.862361, #euro
         'USD': 1.0 #us dollar
         } 
-      
+
     def __init__(self, value, unit="USD"):
         self.value = value
         self.unit = unit
